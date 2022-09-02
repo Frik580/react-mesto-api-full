@@ -1,0 +1,13 @@
+.error {
+    position: absolute;
+    left: 0px;
+    top: 46px;
+    z-index: 1;
+    margin: 0;
+    padding: 0;
+    font-size: 12px;
+    line-height: 1.25;
+    font-weight: 400;
+    font-style: normal;
+    color: #FF0000;
+}

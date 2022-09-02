@@ -1,0 +1,29 @@
+.header {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    max-width: 880px;
+    min-height: 74px;
+    margin: 0 auto;
+    padding-bottom: 40px;
+    padding-top: 45px;
+    border-bottom: 1px solid rgba(84, 84, 84, .7);
+    box-sizing: border-box;
+    align-items: center;
+    /* flex-shrink: 0; */
+}
+
+@media (max-width: 1000px) {
+    .header {
+        padding-left: 27px;
+        padding-right: 27px;
+    }
+}
+
+@media (max-width: 800px) {
+    .header {
+        min-height: 56px;
+        padding-top: 28px;
+        padding-bottom: 42px;
+    }
+}

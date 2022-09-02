@@ -1,0 +1,10 @@
+.element__like-value {
+    color: #000;
+    margin: 0;
+    padding: 0;
+    font-size: 13px;
+    line-height: 1.2;
+    font-weight: 400;
+    font-style: normal;
+    margin-top: 3px;
+}

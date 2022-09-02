@@ -1,0 +1,8 @@
+.profile__avatar-ikon {
+    height: 120px;
+    width: 120px;
+    background-image: url(../../../images/EditButton.svg);
+    background-size: 26px 26px;
+    background-repeat: no-repeat;
+    background-position: center;
+}

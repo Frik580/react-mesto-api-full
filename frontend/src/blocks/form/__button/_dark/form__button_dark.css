@@ -1,0 +1,29 @@
+.form__button_dark {
+    width: 100%;
+    height: 50px;
+    border: 0;
+    border-radius: 2px;
+    font-family: inherit;
+    font-size: 18px;
+    font-weight: 400;
+    font-style: normal;
+    color: #000;
+    background-color: #fff;
+    margin-top: auto;
+    cursor: pointer;
+}
+
+/* @media (max-width: 500px) {
+    .popup-form__button {
+        font-size: 14px;
+        height: 46px;
+    }
+} */
+
+.form__button_dark:enabled {
+    transition: opacity .3s ease-in-out;
+}
+
+.form__button_dark:enabled:hover {
+    opacity: 0.85;
+}

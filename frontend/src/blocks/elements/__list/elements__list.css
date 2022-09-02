@@ -1,0 +1,28 @@
+.elements__list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px 17px;
+    align-items: center;
+    max-width: 880px;
+    margin: 0 auto 66px;
+    padding: 0 19px;
+    list-style-type: none;
+}
+
+@media (max-width: 935px) {
+    .elements__list {
+        max-width: 581px;
+    }
+}
+
+@media (max-width: 800px) {
+    .elements__list {
+        margin-bottom: 48px;
+    }
+}
+
+@media (max-width: 636px) {
+    .elements__list {
+        max-width: 282px;
+    }
+}

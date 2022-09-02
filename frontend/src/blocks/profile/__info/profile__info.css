@@ -1,0 +1,11 @@
+.profile__info {
+    position: relative;
+    max-width: 50%;
+}
+
+@media (max-width: 800px) {
+    .profile__info {
+        margin-bottom: 36px;
+        max-width: calc(100% - 19px - 19px - 28px);
+    }
+}
