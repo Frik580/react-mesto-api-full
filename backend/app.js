@@ -1,3 +1,5 @@
+require('dotenv').config();
+
 const express = require('express');
 const cors = require('cors');
 const mongoose = require('mongoose');
@@ -6,6 +8,7 @@ const usersRouter = require('./routes/users');
 const cardsRouter = require('./routes/cards');
 const { createUser, login } = require('./contollers/users');
 const auth = require('./middlewares/auth');
+const { requestLogger, errorLogger } = require('./middlewares/logger');
 const { NotFound } = require('./errors/notfound');
 const { urlPattern } = require('./utils/constants');
 
@@ -18,6 +21,14 @@ const { PORT = 3001 } = process.env;
 mongoose.connect('mongodb://localhost:27017/mestodb');
 
 app.use(express.json());
+
+app.use(requestLogger);
+
+app.get('/crash-test', () => {
+  setTimeout(() => {
+    throw new Error('Сервер сейчас упадёт');
+  }, 0);
+});
 
 app.post(
   '/signup',
@@ -50,6 +61,8 @@ app.use('/', cardsRouter);
 app.use('*', () => {
   throw new NotFound('Страница не найдена');
 });
+
+app.use(errorLogger);
 
 app.use(errors());
 

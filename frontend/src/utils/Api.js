@@ -1,4 +1,4 @@
-// import { config } from "./constants.js";
+const jwt = localStorage.getItem("jwt");
 
 class Api {
   constructor(options) {
@@ -82,11 +82,6 @@ class Api {
     }).then(this._handleResponse);
   };
 }
-
-// export default Api;
-
-const jwt = localStorage.getItem("jwt");
-console.log(`Это JWT2 ${jwt}`);
 
 const api = new Api({
   baseUrl: "http://localhost:3001",

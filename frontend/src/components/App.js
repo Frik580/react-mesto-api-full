@@ -1,9 +1,6 @@
 import { useState, useEffect } from "react";
 import api from "../utils/Api";
-// import Api from "../utils/Api";
-
 import * as auth from "../utils/Auth";
-// import * as api from "../utils/Apii";
 import "../index.css";
 import Header from "./Header";
 import Main from "./Main";
@@ -35,54 +32,29 @@ function App() {
   const [currentUser, setCurrentUser] = useState("");
   const [userEmail, SetUserEmail] = useState("");
   const [cards, setCards] = useState([]);
-  // const [loggedIn, setLoggedIn] = useState(
-  //   Boolean(localStorage.getItem("jwt"))
-  // );
-  const [loggedIn, setLoggedIn] = useState(false);
-
+  const [loggedIn, setLoggedIn] = useState(
+    Boolean(localStorage.getItem("jwt"))
+  );
   const navigate = useNavigate();
-
-
-  // const api = new Api({
-  //   baseUrl: "http://localhost:3001",
-  //   headers: {
-  //     authorization: `Bearer ${jwt}`,
-  //     "Content-Type": "application/json",
-  //   },
-  // });
-
-  //   console.log(`Это JWT3 ${jwt}`);
 
   // API даннах
 
   useEffect(() => {
     const jwt = localStorage.getItem("jwt");
-    console.log(`Это JWT!!! ${jwt}`);
     jwt && handleAuth(jwt);
     if (loggedIn) {
       const promises = [api.getUserInfo(jwt), api.getCardList(jwt)];
       Promise.all(promises)
         .then((results) => {
           setCurrentUser(results[0]);
-          setCards(results[1]);
+          setCards(results[1].reverse());
           navigate("/");
-          // console.log(results[0]);
         })
         .catch((err) => {
           console.log(err);
         });
-
-        // navigate("/");
     }
   }, [loggedIn]);
-
-  // useEffect(() => {
-  //   if (loggedIn) {
-  //     navigate("/");
-  //   }
-  //   const jwt = localStorage.getItem("jwt");
-  //   jwt && handleAuth(jwt);
-  // }, [loggedIn]);
 
   const onLogout = () => {
     localStorage.removeItem("jwt");
@@ -95,7 +67,6 @@ function App() {
       .getContent(jwt)
       .then((res) => {
         if (res) {
-          // console.log(res);
           setLoggedIn(true);
           SetUserEmail(res.email);
         } else setLoggedIn(false);
@@ -145,17 +116,6 @@ function App() {
       });
   };
 
-  function reloadCards() {
-    api
-      .getCardList()
-      .then((data) => {
-        setCards(data);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  }
-
   function handleUpdateUser(data) {
     api
       .setUserInfo(data)
@@ -193,7 +153,6 @@ function App() {
       .postCard(data)
       .then((newCard) => {
         setCards([newCard, ...cards]);
-        reloadCards();
         closeAllPopups();
       })
       .catch((err) => {
@@ -228,7 +187,6 @@ function App() {
           return card._id !== id;
         });
         setCards(newCards);
-        reloadCards();
         closeAllPopups();
       })
       .catch((err) => {
@@ -293,11 +251,6 @@ function App() {
               />
             </>
           )}
-
-          <Route // роут для gh-pages
-            path="react-mesto-auth"
-            element={<Navigate to="/sign-in" replace />}
-          />
 
           <Route
             path="*"
