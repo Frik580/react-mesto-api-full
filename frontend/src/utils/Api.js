@@ -84,8 +84,8 @@ class Api {
 }
 
 const api = new Api({
-  baseUrl: "http://localhost:3001/api",
-  // baseUrl: "http://metric.students.nomorepartiesxyz.ru/api",
+  // baseUrl: "http://localhost:3001/api",
+  baseUrl: "https://metric.students.nomorepartiesxyz.ru/api",
   headers: {
     authorization: `Bearer ${jwt}`,
     "Content-Type": "application/json",

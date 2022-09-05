@@ -1,5 +1,5 @@
-export const BASE_URL = "http://localhost:3001/api";
-// export const BASE_URL = "http://metric.students.nomorepartiesxyz.ru/api";
+// export const BASE_URL = "http://localhost:3001/api";
+export const BASE_URL = "https://metric.students.nomorepartiesxyz.ru/api";
 
 const handleResponse = (res) => {
   if (res.ok) {
