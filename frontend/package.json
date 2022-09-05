@@ -22,7 +22,7 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "predeploy": "npm run build",
-    "deploy": "gh-pages -d build"
+    "deploy": "scp -r ./build/* metric@51.250.109.204:home/react-mesto-api-full/front"
   },
   "eslintConfig": {
     "extends": [
