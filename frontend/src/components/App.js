@@ -14,7 +14,7 @@ import ImagePopup from "./ImagePopup";
 import InfoTooltip from "./InfoTooltip";
 import ProtectedRoute from "./ProtectedRoute";
 import { CurrentUserContext } from "../contexts/CurrentUserContext";
-import { Routes, Route, useNavigate, Link, Navigate } from "react-router-dom";
+import { Routes, Route, useNavigate, Link } from "react-router-dom";
 
 function App() {
   const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = useState(false);
@@ -97,7 +97,7 @@ function App() {
     auth
       .authorize(email, password)
       .then((res) => {
-        console.log(`Это токен ${res.token}`);
+        // console.log(`Это токен ${res.token}`);
         if (res.token) {
           localStorage.setItem("jwt", res.token);
           const jwt = localStorage.getItem("jwt");
@@ -249,20 +249,23 @@ function App() {
                   />
                 }
               />
+              <Route
+                path="*"
+                element={
+                  <div style={{ textAlign: "center" }}>
+                    <p>Здесь ничего нет: 404!</p>
+                    <Link
+                      to="/"
+                      className="link hover"
+                      style={{ fontSize: 14 }}
+                    >
+                      На главную страницу
+                    </Link>
+                  </div>
+                }
+              />
             </>
           )}
-
-          <Route
-            path="*"
-            element={
-              <div style={{ textAlign: "center" }}>
-                <p>Здесь ничего нет: 404!</p>
-                <Link to="/" className="link hover" style={{ fontSize: 14 }}>
-                  На главную страницу
-                </Link>
-              </div>
-            }
-          />
         </Routes>
 
         <EditProfilePopup

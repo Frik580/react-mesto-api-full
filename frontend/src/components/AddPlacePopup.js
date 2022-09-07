@@ -77,6 +77,10 @@ function AddPlacePopup({ isOpen, onClose, onAddPlace, isPostCardError }) {
         <input
           {...register("url", {
             required: "Поле обязательно к заполнению",
+            pattern: {
+              value: /https?:\/\/(w{3}\.)?([\w-]{1,}\.)+[\w._~:/?#[\]@!$&'()*+,;=]*#?/i,
+              message: `Введите ссылку вида "http://example.net/picture.jpeg"`, 
+            },
             minLength: {
               value: 2,
               message: "Минимум 2 символа",

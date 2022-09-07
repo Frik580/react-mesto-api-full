@@ -1,5 +1,6 @@
 import PopupWithForm from "./PopupWithForm";
 import React, { useRef, useEffect, useState } from "react";
+import { useForm } from "react-hook-form";
 
 function EditAvatarPopup({
   isOpen,
@@ -9,22 +10,41 @@ function EditAvatarPopup({
 }) {
   const [buttonValue, setButtonValue] = useState("");
   const inputRef = useRef();
+  const {
+    register,
+    formState: { errors, isValid },
+    handleSubmit,
+    reset,
+  } = useForm({
+    mode: "all",
+  });
+
+  const { ref, ...rest } = register("avatar", {
+    required: "Поле обязательно к заполнению",
+    pattern: {
+      value: /https?:\/\/(w{3}\.)?([\w-]{1,}\.)+[\w._~:/?#[\]@!$&'()*+,;=]*#?/i,
+      message: `Введите ссылку вида "http://example.net/picture.jpeg"`,
+    },
+    minLength: {
+      value: 2,
+      message: "Минимум 2 символа",
+    },
+  });
 
   useEffect(() => {
     inputRef.current.focus();
-    inputRef.current.value = "";
+    reset();
     setButtonValue("Сохранить");
-  }, [isOpen]);
+  }, [isOpen, reset]);
 
   useEffect(() => {
     setTimeout(() => {
-      inputRef.current.value = "";
+      reset();
     }, 2000);
     setButtonValue("Сохранить");
-  }, [isEditAvatarError]);
+  }, [isEditAvatarError, reset]);
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
+  const onHandle = () => {
     setButtonValue("Сохранение...");
     onUpdateAvatar({
       avatar: inputRef.current.value,
@@ -37,21 +57,26 @@ function EditAvatarPopup({
       buttonValue={isEditAvatarError ? "Ошибка в загрузке данных" : buttonValue}
       isOpen={isOpen}
       onClose={onClose}
-      onSubmit={handleSubmit}
+      onSubmit={handleSubmit(onHandle)}
       conteinerSize="popup__conteiner_size_medium"
-      isValid={true}
+      isValid={isValid}
     >
       <fieldset className="form__conteiner">
         <input
+          {...rest}
+          ref={(e) => {
+            ref(e);
+            inputRef.current = e;
+          }}
           type="url"
-          ref={inputRef}
-          name="avatar"
-          className="form__item"
-          minLength="2"
+          className={`form__item ${
+            errors?.namecard && "form__item_type_error"
+          }`}
           placeholder="Ссылка на картинку"
-          required
         />
-        <span id="avatar-error" className="error" />
+        <span id="avatar-error" className="error">
+          {errors?.avatar && <p>{errors?.avatar?.message ?? "Error!!!"}</p>}
+        </span>
       </fieldset>
     </PopupWithForm>
   );

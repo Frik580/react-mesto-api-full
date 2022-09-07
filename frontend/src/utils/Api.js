@@ -14,7 +14,6 @@ class Api {
   };
 
   getJwt = (jwt) => {
-    console.log(`Пришел токен ${jwt}`);
     this._headers = {
       authorization: `Bearer ${jwt}`,
       "Content-Type": "application/json",
@@ -57,8 +56,6 @@ class Api {
   };
 
   changeLikeCardStatus = (data, isLiked) => {
-    console.log(data);
-    console.log(isLiked);
     if (isLiked) {
       return fetch(`${this._url}/cards/${data._id}/likes`, {
         method: "DELETE",
@@ -84,7 +81,6 @@ class Api {
 }
 
 const api = new Api({
-  // baseUrl: "http://localhost:3001/api",
   baseUrl: "https://metric.students.nomorepartiesxyz.ru/api",
   headers: {
     authorization: `Bearer ${jwt}`,
