@@ -14,11 +14,11 @@ export function useFormAndValidation() {
 
   const resetForm = useCallback(
     (newValues = {}, newErrors = {}, newIsValid = false) => {
-      setValues(newValues);
+      // setValues(newValues);
       setErrors(newErrors);
       setIsValid(newIsValid);
     },
-    [setValues, setErrors, setIsValid]
+    [setErrors, setIsValid]
   );
 
   return {
